@@ -1,0 +1,110 @@
+modules.exports = (function()
+{
+    var express    = require('express');        // call express
+    var app        = express();                 // define our app using express
+    var bodyParser = require('body-parser');
+    var r = require('rethinkdb');
+
+    var http = require('http');
+
+    var connection = null;
+    r.connect( {host: 'localhost', port: 28015}, function(err, conn) {
+
+        if (err) throw err;
+        console.log("started connection");
+        connection = conn;
+    });
+    var router = express.Router();
+    router.route('/pastes').get(function(req, res) {
+      
+            r.db('imagePocket').table('pastes').run(connection, function(err, cursor) {
+                if (err) 
+                {
+                    res.send(err);
+                }
+                cursor.toArray(function(err, result) {
+
+                    if (err) 
+                    {
+                        res.send(err);
+                    }
+                    console.log(JSON.stringify(result));
+                    res.json(result);
+
+                });
+           
+            });
+        
+   
+        });
+
+
+    router.route('/tags').get(function(req, res)
+                              {
+      
+            r.db('imagePocket').table('tags').run(connection, function(err, cursor) {
+                if (err) 
+                {
+                    res.send(err);
+                }
+                cursor.toArray(function(err, result) {
+
+                if (err) 
+                {
+                    res.send(err);
+                }
+                 res.json(result);
+
+            });
+          
+        });
+    });
+router.route('/pastes/getFiltered').get(function(req, res)
+                              {
+    
+      var arr = req.query.filters;
+        
+        if(!arr)
+        {
+         res.send("");
+            return;
+        }
+    
+    
+            r.db('imagePocket').table('tags_pastes_connection').filter(function(doc)
+                                                                   {
+                
+                var checker = doc('TagId');
+              
+    
+                for(var i = 0; i < arr.length; ++i)
+                {
+                    if(arr[i] == checker)
+                    {
+                     return true;   
+                    }
+                }
+                return false;
+                
+            }
+               
+          
+        ).run(connection, function(err, cursor)
+               {
+                 if (err) 
+                {
+                    res.send(err);
+                }
+                cursor.toArray(function(err, result) {
+
+                if (err) 
+                {
+                    res.send(err);
+                }
+                 res.json(result);
+            });
+    });
+});
+    return router;
+    
+})();
