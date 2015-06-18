@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>;
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImagePocket</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-multiselect.css" rel="stylesheet">
+    <!-- Optional theme -->
+    <style>
+        .activated {
+            background-color: #b9b2b2;
+        }
+
+        #myModalEdit .modal-dialog {
+            width: 100%;
+        }
+
+        body {
+            padding-top: 50px;
+        }
+    </style>
+
+
+    ;
+</head>
+<body style="background-color: #050125">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">ImagePocket</a>
+            </div>
+            <div class="navbar-collapse collapse panel-info">
+
+                <ul class="nav navbar-nav">
+
+
+                    <li><a href="/">Home</a></li>
+                    <li id="pasteLink" class="active"><a href="/pastes">Pastes</a></li>
+                    <li id="pageLink"><a href="/Pages">Pages</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/Account/Register" id="registerLink">Register</a></li>
+                    <li><a href="/Account/Login" id="loginLink">Log in</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        <div class="row">
+            <div class=" col-xs-8" style="color: white" id="bodyblock">
+
+                <br />
+
+                <h3>Saved Pastes </h3>
+                <hr />
+
+
+
+                <div class="panel-group" id="menu2" data-bind=" foreach: pages">
+                    <br />
+                    <h3 class="panel-body">Saved pages</h3>
+                    <hr />
+
+                    <div class="thumbnail" style="margin-bottom:5%; padding: 1%; display: inline-block">
+                        <a data-bind =" attr: {href: '/pages' + file}"><img class="responsive" style="border: outset" /></a>
+                        <div class="caption">
+                            <h3 class="panel-heading">data-bind = "text: name"</h3>
+                            <h5 data-bind="text: date"></h5>
+                        </div>
+                    </div>
+
+
+                    
+
+                   
+                    
+                </div>
+
+               
+        <footer style="color: white">
+            <p>&copy; 2015 - Andrii Skolotianyi</p>
+        </footer>
+    </div>
+
+    <!-- Latest compiled and minified CSS -->
+    <script src="/Scripts/jquery-1.10.2.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/Scripts/bootbox.min.js"></script>
+    <script src="/Scripts/bootbox.min.js"></script>
+    <script src="/Scripts/bootstrap-multiselect.js"></script>
+    <script src="/Scripts/typeahead.js"></script>
+    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+    <script src="/Scripts/knockout-3.3.0.js"></script>
+    <script src="/Scripts/knockout-3.3.0.debug.js"></script>
+    <script src="/Scripts/PageViewModel.js"></script>
+    <script src="/Scripts/page.js"></script>
+
+</body>
+</html>
+
+

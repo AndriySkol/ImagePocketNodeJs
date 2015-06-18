@@ -25,6 +25,7 @@
     <Content Include="package.json" />
     <Compile Include="app\mhtPagesModule.js" />
     <Compile Include="config.js" />
+    <Compile Include="public\Scripts\PageViewModel.js" />
     <Compile Include="public\Scripts\paste.js" />
     <Compile Include="public\Scripts\PasteViewModel.js" />
     <Compile Include="server.js" />
@@ -37,6 +38,7 @@
     <Content Include="public\css\bootstrap.min.css" />
     <Content Include="public\css\bootstrap-multiselect.css" />
     <Content Include="public\views\main.html" />
+    <Content Include="public\views\pages.html" />
     <Content Include="public\views\Paste.html" />
   </ItemGroup>
   <ItemGroup>

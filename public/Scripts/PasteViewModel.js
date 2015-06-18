@@ -3,7 +3,7 @@
         var parent = $(event.target).parent().parent();
 
 
-
+        ;
         
         tinymce.init({
             selector: "#myModalEditBody",
@@ -251,7 +251,7 @@
                             }
                         });
 
-            });
+         ;   });
 
 
         };
