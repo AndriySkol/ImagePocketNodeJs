@@ -1,0 +1,34 @@
+﻿<div class="modal fade" style="color: black">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Tags editing</h4>
+            </div>
+            <div class="modal-body" id="myModalBody">
+
+                <div class="form-group form-inline">
+                    <input ng-model="inputField"
+                           typeahead="tag as tag.name for tag in tags"
+                           type="text" class="typeahead form-control"
+                           placeholder="Enter new Tag" data-provide="typeahead"
+                           typeahead-select-on-exact="true">
+                    <button class="btn btn default" id="addButton" ng-click="addNewTag()"> Add</button>
+                </div>
+                <div role="menu" aria-labelledby="dropdownMenu1" style="padding: 2%; color: black" >
+                    <h5 ng-repeat="tag in pasteTags"><span class="text">{{tag.name}}</span>
+                    <span style="cursor: pointer"
+                           ng-class="{'glyphicon-remove': tag.isValid, 'glyphicon-plus' : !tag.isValid}" 
+                          ng-click="tag.isValid = !tag.isValid" 
+                          class="glyphicon pull-right">
+                        </span>
+                    </h5>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="modalSubmit" ng-click="submit()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

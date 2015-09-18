@@ -1,0 +1,64 @@
+﻿<div class=" col-xs-8" style="color: white" id="bodyblock">
+    <br />
+    <h3>Saved Pastes </h3>
+    <hr />
+  
+    <div class="panel-group" ng-repeat = 'paste in vm.pastes | InArray:vm.pastesFilter:"id"' >
+
+        <div class="panel panel-default singleObj" style="overflow: visible">
+            <div class="panel-heading heading  clicked" >
+                <div style="display: inline-block; cursor: pointer;" data-toggle="collapse" data-target = "#text_{{paste.id}}">
+                    <h4 class="info-line" style="display: inline-block"> {{paste.name}} </h4>
+                </div> <span hidden style="cursor: pointer"
+                              class="glyphicon glyphicon-remove pull-right" 
+                                ng-click="vm.deletePaste(paste)"></span> 
+                <span hidden class="glyphicon glyphicon-edit pull-right" 
+                      ng-click="vm.updatePaste(paste)" style=" margin-right 1%; cursor:pointer"></span>
+                <div class="dropdown pull-right " 
+                     style="margin-right: 1%; cursor:pointer">
+                    <span class="  glyphicon glyphicon-tag "aria-expanded="true" 
+                          ng-click="vm.changePasteTags(paste)" hidden> </span>
+                </div>
+                <p style="margin-right: 2%" class=" pull-right date"> {{paste.date |date: short}}</p>
+            </div>
+
+            <div class='collapse panel-collapse' style="overflow-x: scroll; " id = 'text_{{paste.id}}'>
+                <div class='innerDivs panel-body ' 
+                     style="position: relative; max-width:65%; color: black;  width: auto; white-space:nowrap; background-color: rgba(216, 216, 216, 0.98)"
+                      data-first="true" ng-bind-html="paste.data"></div>
+            </div>
+        </div>
+
+    </div>
+    <tags-edit-modal api="vm.tagsEditApi" tags="vm.tags"></tags-edit-modal>
+    <paste-edit api="vm.pasteEditApi"></paste-edit>
+    <br />
+    <br />
+    <hr />
+</div>
+<nav class="col-xs-4">
+    <br />
+    <br />
+
+    <div style="position: fixed; color: white; margin-left: 1%;" id="sidebar">
+        <br />
+        <input ng-model="vm.searchField"/>
+        <br /><br /><br />
+        <span class="glyphicon glyphicon-plus" ng-click="vm.addFilter()"> </span>
+        <h4 style=" display: inline;">Filters</h4> <br /> <br />
+        <div ng-repeat="filter in vm.filterIds">
+            <div isteven-multi-select
+                 input-model="vm.inputTags[filter]"
+                 output-model="vm.selectedTags[filter]"
+                 button-label="name"
+                 item-label="name"
+                 tick-property="ticked"
+                 output-properties="id"
+                 on-item-click="vm.updateTagChange()">
+            </div>
+            <br />
+        </div>
+
+
+    </div>
+</nav>

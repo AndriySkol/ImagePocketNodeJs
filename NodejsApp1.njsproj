@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{9abf9665-b68b-4558-8157-081bc0ea6ec9}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
     <StartupFile>server.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -22,32 +22,53 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Content Include="bower.json" />
     <Content Include="package.json" />
     <Compile Include="app\mhtPagesModule.js" />
+    <Compile Include="gulpfile.js" />
+    <Compile Include="public\client\app\app.js" />
+    <Compile Include="public\client\app\inArray.filter.js" />
+    <Compile Include="public\client\app\pages\pagesController.controller.js" />
+    <Compile Include="public\client\app\pages\pageSourceService.service.js" />
+    <Compile Include="public\client\app\pastes\paste.controller.js" />
+    <Compile Include="public\client\app\pastes\pasteEditor\pasteEdit.directive.js" />
+    <Compile Include="public\client\app\pastes\pasteSource.service.js" />
+    <Compile Include="public\client\app\pastes\tagsEdit\tagsEditModal.directive.js" />
+    <Compile Include="public\client\app\pastes\tagsEdit\tagsSourceSerivce.service.js" />
+    <Compile Include="public\client\app\routes.js" />
     <Compile Include="config.js" />
-    <Compile Include="public\Scripts\PageViewModel.js" />
-    <Compile Include="public\Scripts\paste.js" />
-    <Compile Include="public\Scripts\PasteViewModel.js" />
+    <Compile Include="public\dist\bower-libs.min.js" />
+    <Compile Include="public\dist\imagePocket-ng.min.js" />
     <Compile Include="server.js" />
     <Compile Include="app\pasteApiModule.js" />
-    <Content Include="public\css\bootstrap-theme.css" />
-    <Content Include="public\css\bootstrap-theme.css.map" />
-    <Content Include="public\css\bootstrap-theme.min.css" />
-    <Content Include="public\css\bootstrap.css" />
-    <Content Include="public\css\bootstrap.css.map" />
-    <Content Include="public\css\bootstrap.min.css" />
-    <Content Include="public\css\bootstrap-multiselect.css" />
+    <Content Include="public\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="public\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="public\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="public\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="public\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="public\client\app\pastes\pasteEditor\pasteEditModal.html" />
+    <Content Include="public\client\app\pastes\tagsEdit\tagsEditModal.html" />
+    <Content Include="public\dist\bower-style.min.css" />
     <Content Include="public\views\main.html" />
-    <Content Include="public\views\pages.html" />
-    <Content Include="public\views\Paste.html" />
+    <Content Include="public\views\partial-views\home.partial.html" />
+    <Content Include="public\views\partial-views\pagesContent.partial.html" />
+    <Content Include="public\views\partial-views\pasteContent.partial.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app" />
+    <Folder Include="public\bootstrap\" />
+    <Folder Include="public\bootstrap\fonts\" />
+    <Folder Include="public\client\app\" />
+    <Folder Include="public\client\app\layout\" />
+    <Folder Include="public\client\app\pages\" />
+    <Folder Include="public\client\app\pastes\" />
+    <Folder Include="public\client\app\pastes\pasteEditor\" />
+    <Folder Include="public\client\app\pastes\tagsEdit\" />
+    <Folder Include="public\dist\" />
+    <Folder Include="public\client\" />
     <Folder Include="public\" />
-    <Folder Include="public\css\" />
-    <Folder Include="public\Scripts\" />
     <Folder Include="public\views\" />
-    <Folder Include="views\" />
+    <Folder Include="public\views\partial-views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->

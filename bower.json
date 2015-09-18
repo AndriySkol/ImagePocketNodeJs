@@ -1,0 +1,31 @@
+{
+  "name": "ImagePocket",
+  "version": "1.0",
+  "homepage": "https://github.com/Fakvarl/ImagePocketNodeJs",
+  "authors": [
+    "Fakvarl <Skolandrik@gmail.com>"
+  ],
+  "description": "heia",
+  "main": "server.js",
+  "keywords": [
+    "js"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bootstrap": "~0.13.4",
+    "angular-sanitize": "~1.4.6",
+    "angular-ui-router": "ui-route#~0.2.15",
+    "bootstrap": "~3.3.5",
+    "isteven-angular-multiselect": "~4.0.0",
+    "jquery": "~2.1.4",
+    "tinymce": "4.1.0",
+    "underscore": "~1.8.3"
+  }
+}

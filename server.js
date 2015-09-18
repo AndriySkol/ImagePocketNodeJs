@@ -28,6 +28,10 @@ app.route('/pastes')
 .get(function (req, res) {
     res.sendfile(path.join(__dirname, '/public/views/Paste.html'));
 });
+app.route('/pages')
+.get(function (req, res) {
+    res.sendfile(path.join(__dirname, '/public/views/pages.html'));
+});
 // set our port
 
 // ROUTES FOR OUR API

@@ -5,6 +5,8 @@ module.exports = (function () {
     var config = require('../config.js');
     var r = require('rethinkdb');
     var co = require('co');
+    var async = require('async');
+    var u = require('underscore');
     
       
     var router = express.Router();
@@ -329,8 +331,8 @@ module.exports = (function () {
         .get(function (req, res, next) {
         var id = req.query.id;
         if (id) {
-r.db('imagePocket')
-.table('tags_pastes_connection')
+            r.db('imagePocket')
+            .table('tags_pastes_connection')
             .getAll(id, { index: 'paste_id' })
             .eqJoin("tag_id", r.db('imagePocket').table('tags'))
             .zip()
@@ -359,8 +361,9 @@ r.db('imagePocket')
     });
     router.route('/filters')
         .get(function (req, res, next) {
-        
+      
         var arr = req.query.filters;
+       
         if (!arr) {
             r.db('imagePocket')
                 .table('pastes')
@@ -375,37 +378,52 @@ r.db('imagePocket')
                         if (err) {
                         res.send(err);
                         next();
-                        }
-                    res.json(result);
+                    }
+                    
+                    res.json([result]);
                     next();
                     });
                 });
 
         }
         else {
-            r.db('imagePocket')
-                    .table('tags_pastes_connection')
-                    .filter(function (doc) {
-                return r.expr(arr).contains(doc('tag_id'));
-            })
-            .map(function(val) { return { id: val('paste_id') };})
-            .run(req.db_connection, function (err, cursor) {
-                if (err) {
-                    res.send(err);
-                    next();
-                }
-                cursor.toArray(function (err, result) {
-                    
+            var final = [];
+            async.each(arr, function (argArr, callback) {
+                
+                var size = argArr.length;
+                r.db('imagePocket')
+                .table('tags_pastes_connection')
+                .getAll(r.args(argArr), { index: "tag_id" })
+                .group("paste_id")
+                .count().ungroup()
+                .filter(r.row("reduction").eq(size))
+                .map(function (val) { return { id: val('group') }; })
+                .run(req.db_connection, function (err, cursor) {
                     if (err) {
-                        res.send(err);
-                        next();
+                        
+                        callback();
                     }
-                    res.json(result);
-                    next();
+                    cursor.toArray(function (err, result) {
+                        
+                        if (err) {
+                            callback();
+                        }
+                        final.push(result);
+                        callback();
+                    });
                 });
+            },
+            function () {
+                res.send(final);
+                next();
             });
-        }
+                
+           
         
+
+           }
+           
+            
         
         
         
@@ -442,12 +460,16 @@ r.db('imagePocket')
     }
      
     );
-    router.route("/deleteTagConnections")
+    router.route("/deleteTagConnections/:id")
     .post(function (req, res, next) {
-     
+        var id = req.params.id;
+        var argsArray = u.map(req.body, 
+            function (item) {
+            return [item, id];
+        });
         r.db('imagePocket')
         .table('tags_pastes_connection')
-        .getAll(r.args(req.body), { index : 'tag_id' })
+        .getAll(r.args(argsArray), { index : 'connection' })
         .delete()
         .run(req.db_connection, function (result) {
           
@@ -464,13 +486,11 @@ r.db('imagePocket')
         r.db("imagePocket")
         .table('tags')
         .filter(function (row) {
-            
             return r.db("imagePocket")
             .table('tags_pastes_connection')
             .getAll(row('id'), { index : 'tag_id' })
             .count()
             .eq(0);
-
         })
         .delete()
         .run(req.db_connection,
