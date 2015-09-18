@@ -46,7 +46,7 @@ app.listen(port);
 console.log('Magic happens on port ' + port);
 
 //Create the database
-/*var r = require('rethinkdb');
+var r = require('rethinkdb');
 r.connect({ host: config.rethinkdb_host, port: config.rethinkdb_port }, function (err, connection) {
     var rdb;
     if (err)
@@ -116,4 +116,3 @@ r.connect({ host: config.rethinkdb_host, port: config.rethinkdb_port }, function
     
 
 });
-*/
